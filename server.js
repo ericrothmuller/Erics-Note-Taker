@@ -38,14 +38,14 @@ app.post ("/api/notes", (req, res) => {
     const noteBody = req.body;
     readFile("./develop/db/db.json", "utf8")
     .then( function(notesdata) {
-        let notelist = [].concat(JSON.parse(notesdata));
+        let notelist = [].concat((notesdata));
         noteBody.id = notelist.length + 1;
         notelist.push(notesdata);
         return notelist;
     } )
     .then( function(notelist) {
         writeFile("./develop/db/db.json", JSON.stringify(notelist))
-        res.json(notesdata);
+        res.json(notelist);
     })
 })
 
