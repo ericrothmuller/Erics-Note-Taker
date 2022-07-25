@@ -29,9 +29,12 @@ app.get("*", (req, res) => {
 
 app.get ("/api/notes", (req, res) => {
 
-    res.sendFile(path.join(__dirname, "/db/db.json"))
+    readFileAsync("/db/db.json", "json")
+    .then( function(notes) {
 
-})
+    }
+
+)})
 
 app.post ("/api/notes", (req, res) => {
 
