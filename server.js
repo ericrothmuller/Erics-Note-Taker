@@ -42,7 +42,21 @@ app.get("/api/notes", (req, res) => {
 //     })
 // });
 
+app.post ("/api/notes", (req, res) => {
+    const noteBody = req.body;
+    readFile("./develop/db/db.json", "utf8")
+    .then( function(notesdata) {
 
+        const notelist = [].concat(JSON.parse(notesdata))
+        notelist.push(noteBody);
+        return notelist;
+    } )
+    .then( function(notelist) {
+        console.log(notelist);
+        writeFile("./develop/db/db.json", JSON.stringify(notelist))
+        res.json();
+    })
+})
 
 // app.delete ("/api/notes/:id", (req, res) => {
 //     console.log("params: ", req.params);
