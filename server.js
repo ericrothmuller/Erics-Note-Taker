@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 
-app.use(express.static("./develop/public"));
+app.use(express.static("./public"));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -27,7 +27,7 @@ app.use(express.json());
 
 app.get("/api/notes", (req, res) => {
 
-    readFile("./develop/db/db.json", "utf8").then(function(data) {
+    readFile("./db/db.json", "utf8").then(function(data) {
         const allNotes = [].concat(JSON.parse(data));
         res.json(allNotes);
     })
@@ -38,7 +38,7 @@ app.get("/api/notes", (req, res) => {
 
 app.post ("/api/notes", (req, res) => {
     const noteBody = req.body;
-    readFile("./develop/db/db.json", "utf8")
+    readFile("./db/db.json", "utf8")
     .then( function(notesdata) {
 
         const notelist = [].concat(JSON.parse(notesdata))
@@ -47,7 +47,7 @@ app.post ("/api/notes", (req, res) => {
     } )
     .then( function(notelist) {
         console.log(notelist);
-        writeFile("./develop/db/db.json", JSON.stringify(notelist))
+        writeFile("./db/db.json", JSON.stringify(notelist))
         res.json();
     })
 })
@@ -55,15 +55,15 @@ app.post ("/api/notes", (req, res) => {
 // General Routes
 
 app.get("/notes", (req, res) => {
-    res.sendFile(path.join(__dirname, "./develop/public/notes.html"))
+    res.sendFile(path.join(__dirname, "./public/notes.html"))
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "./develop/public/index.html"))
+    res.sendFile(path.join(__dirname, "./public/index.html"))
 });
 
 app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "./develop/public/index.html"))
+    res.sendFile(path.join(__dirname, "./public/index.html"))
 });
 
 
