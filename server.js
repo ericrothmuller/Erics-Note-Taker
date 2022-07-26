@@ -22,9 +22,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Routes
 
-// app.post("/", (req, res) => {
-//     console.log(req)
-// })
+// /api/notes GET REQUEST
 
 app.get("/api/notes", (req, res) => {
 
@@ -35,12 +33,7 @@ app.get("/api/notes", (req, res) => {
 
 });
 
-// app.post("/api/notes", (req, res) => {
-//     const noteBody = req.body;
-//     readFile("./develop/db/db.json", "utf8").then(function(data) {
-
-//     })
-// });
+// /api/notes POST REQUEST
 
 app.post ("/api/notes", (req, res) => {
     const noteBody = req.body;
@@ -58,10 +51,7 @@ app.post ("/api/notes", (req, res) => {
     })
 })
 
-// app.delete ("/api/notes/:id", (req, res) => {
-//     console.log("params: ", req.params);
-//     console.log("query: ", req.query);
-// });
+// General Routes
 
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./develop/public/notes.html"))
