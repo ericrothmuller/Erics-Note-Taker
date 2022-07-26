@@ -6,9 +6,9 @@ var app = express();
 
 const fs = require("fs");
 
-const path = require("path");
-
 const util = require("util");
+
+const path = require("path");
 
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
