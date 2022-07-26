@@ -4,8 +4,6 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-console.log("I WAS RAN");
-
 if (window.location.pathname === '/notes') {
   noteTitle = document.querySelector('.note-title');
   noteText = document.querySelector('.note-textarea');
@@ -90,7 +88,7 @@ const handleNoteDelete = (e) => {
   if (activeNote.id === noteId) {
     activeNote = {};
   }
-
+console.log(noteId);
   deleteNote(noteId).then(() => {
     getAndRenderNotes();
     renderActiveNote();

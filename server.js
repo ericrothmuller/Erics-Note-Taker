@@ -17,37 +17,37 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 
-app.use(express.static("./develop/public"))
+app.use(express.static("./develop/public"));
 app.use(express.urlencoded({extended: true}));
-app.use(express.json());
 
 // Routes
 
+// app.post("/", (req, res) => {
+//     console.log(req)
+// })
+
 app.get("/api/notes", (req, res) => {
 
-    readFile("./develop/db/db.json", "utf8")
-    .then( function(notesdata) {
-        let notelist = [].concat(notesdata);
-
-        res.json(notelist)
-    }
-
-)})
-
-app.post ("/api/notes", (req, res) => {
-    const noteBody = req.body;
-    readFile("./develop/db/db.json", "utf8")
-    .then( function(notesdata) {
-        let notelist = [].concat((notesdata));
-        noteBody.id = notelist.length + 1;
-        notelist.push(notesdata);
-        return notelist;
-    } )
-    .then( function(notelist) {
-        writeFile("./develop/db/db.json", JSON.stringify(notelist))
-        res.json(notelist);
+    readFile("./develop/db/db.json", "utf8").then(function(data) {
+        const allNotes = [].concat(JSON.parse(data));
+        res.json(allNotes);
     })
-})
+
+});
+
+// app.post("/api/notes", (req, res) => {
+//     const noteBody = req.body;
+//     readFile("./develop/db/db.json", "utf8").then(function(data) {
+
+//     })
+// });
+
+
+
+// app.delete ("/api/notes/:id", (req, res) => {
+//     console.log("params: ", req.params);
+//     console.log("query: ", req.query);
+// });
 
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "./develop/public/notes.html"))
